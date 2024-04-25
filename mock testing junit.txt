@@ -1,0 +1,32 @@
+testing mock junit:
+
+http://www.vogella.com/tutorials/JUnit/article.html#mockingframeworks
+
+http://www.vogella.com/tutorials/Mockito/article.html
+
+
+La filosofía general puede observarse aquí:
+
+http://www.javiergarzas.com/2015/10/framework-mocks-mockito.html
+
+
+La web:
+
+http://site.mockito.org/
+
+
+Seguir esto a modo de tutorial:
+
+http://static.javadoc.io/org.mockito/mockito-core/2.7.21/org/mockito/Mockito.html
+
+
+que puede aplicarse a las clases que dependen de la clase PoolConductores de Cotxox?
+
+
+Hacer esto con los numeros romanos para explicar inyección de dependencias:
+
+http://www.vogella.com/tutorials/EclipseRCP/article.html#dependency-injection-and-eclipse
+
+
+
+

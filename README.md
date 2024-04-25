@@ -21,6 +21,6 @@ Mockito, además, nos ofrece la posibilidad de realizar cierta reflexión sobre 
 
 Testear aplicaciones en el Mundo Real TM es un poco más complicado y, si a la dificultad añadida por la arquitectura cliente-servidor, le sumamos la de una arquitectura basada en microservicios, lejos de las placenteras aplicaciones monolíticas, entonces es necesario disponer de un conocimiento más profundo de la API del _framework_ de testig y mock.
 
-En mi proyeto [grpc-tourism-receptive](https://github.com/dfleta/grpc-tourism-receptive) encontrarás a mockito y Slimer en acción en una aplicación basada en el framework gRPC de Google para la construcción de aplicaciones basadas en microservicios, implementando el patrón GoF _observer_ para implementar la lógica de un receptivo tutístico:
+En mi proyeto [grpc-tourism-receptive](https://github.com/dfleta/grpc-tourism-receptive) encontrarás a mockito y Slimer en acción en una aplicación basada en el framework gRPC de Google para la construcción de aplicaciones basadas en microservicios, implementando el patrón GoF _observer_ para implementar la lógica de un receptivo turístico al estilo mallorquín ;)
 
 https://github.com/dfleta/grpc-tourism-receptive

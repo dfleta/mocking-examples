@@ -2,7 +2,7 @@ package org.foobarspam.MockitoEjemplo;
 
 import java.util.ArrayList;
 
-public class Conductor {
+public class Conductor implements Conductora {
 	
 	private String nombre = null;
 	private String modelo = null;
@@ -18,11 +18,11 @@ public class Conductor {
 	}
 
 	public String getNombre() {
-		return this.nombre;
+		return "";
 	}
 
 	public String getModelo() {
-		return this.modelo;
+		return "";
 	}
 
 	public void setModelo(String modelo) {
@@ -30,14 +30,14 @@ public class Conductor {
 	}
 
 	public String getMatricula() {
-		return this.matricula;
+		return "";
 	}
 
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 
-	public Double getValoracion() {
+	public double getValoracion() {
 		return this.valoracionMedia;
 	}
 	

@@ -5,18 +5,18 @@ import java.util.Random;
 
 public class PoolConductores implements PoolConductoras {
 	
-	private ArrayList<Conductor> poolConductores = new ArrayList<>();
+	private ArrayList<Conductora> poolConductores = new ArrayList<>();
 	
-	public PoolConductores(ArrayList<Conductor> poolConductores){
+	public PoolConductores(ArrayList<Conductora> poolConductores){
 		this.poolConductores = poolConductores;
 	}
 	
-	public ArrayList<Conductor> getPoolConductores(){
+	public ArrayList<Conductora> getPoolConductores(){
 		return this.poolConductores;
 	}
 	
-	public Conductor asignarConductor(){
-		Conductor conductor = new Conductor();
+	public Conductora asignarConductor(){
+		Conductora conductor = new Conductor();
 		Random aleatorio = new Random();
 		boolean asignado = false;
 		while(!asignado){
@@ -30,7 +30,7 @@ public class PoolConductores implements PoolConductoras {
 		return conductor;
 	}
 	
-	public void addConductor(Conductor conductor){
+	public void addConductor(Conductora conductor){
 		this.poolConductores.add(conductor);
 	}
 	
@@ -38,7 +38,7 @@ public class PoolConductores implements PoolConductoras {
 		return this.poolConductores.size();
 	}
 	
-	public Conductor getConductorAt(int index){
+	public Conductora getConductorAt(int index){
 		return this.poolConductores.get(index);
 	}
 	

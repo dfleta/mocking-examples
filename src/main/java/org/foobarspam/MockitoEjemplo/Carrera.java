@@ -12,7 +12,7 @@ public class Carrera {
 	private double costeTotal = 0;
 	private int propina = 0;
 	
-	private Conductor conductor = null;
+	private Conductora conductor = null;
 	
 	
 	public Carrera(String tarjetaCredito){
@@ -69,16 +69,20 @@ public class Carrera {
 		this.tiempoCarrera = tiempoCarrera;
 	}
 	
-	public void setConductor(Conductor conductor){
+	public void setConductor(Conductora conductor){
 		this.conductor = conductor;
 	}
 	
-	public Conductor getConductor(){
+	public Conductora getConductor(){
 		return this.conductor;
 	}
 
 	public String getModeloVehiculo() {
 		return this.conductor.getModelo();
+	}
+
+	public String getMatricula() {
+		return this.getConductor().getMatricula();
 	}
 	
 	public Double getValoracionConductor() {

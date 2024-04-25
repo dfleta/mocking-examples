@@ -95,7 +95,7 @@ public class CarreraTest {
 	@Test
 	public void setConductorTest(){
 		// Conductor conductor = new Conductor(nombre);
-		Conductor mockConductor = mock(Conductor.class);
+		Conductora mockConductor = mock(Conductora.class);
 		
 		String test="Samantha"; 
 		when(mockConductor.getNombre()).thenReturn(test);
@@ -106,11 +106,15 @@ public class CarreraTest {
 		test="Prius";
 		when(mockConductor.getModelo()).thenReturn(test); 
 		assertEquals(test, carrera.getModeloVehiculo());
+
+		test="JFK123"; 
+		when(mockConductor.getMatricula()).thenReturn(test);
+		assertEquals(test, carrera.getMatricula());
 	}
 	
 	@Test
 	public void asignarConductor(){
-		Conductor mockConductor = mock(Conductor.class);
+		Conductora mockConductor = mock(Conductora.class);
 		when(mockConductor.getNombre()).thenReturn("Samantha");
 
 		carrera.setConductor(null);
@@ -132,7 +136,7 @@ public class CarreraTest {
 	
 	@Test
 	public void liberarConductor(){
-		Conductor mockConductor = mock(Conductor.class);
+		Conductora mockConductor = mock(Conductora.class);
 		when(mockConductor.isOcupado()).thenReturn(false);
 		carrera.setConductor(mockConductor);
 		carrera.liberarConductor(); // ejem, no testea la logica de carrera
@@ -142,7 +146,7 @@ public class CarreraTest {
 	@Test
 	public void setValoracion(){
 
-		Conductor mockConductor = mock(Conductor.class);
+		Conductora mockConductor = mock(Conductora.class);
 		carrera.setConductor(mockConductor);
 		
 		Double valoracion = 5d;

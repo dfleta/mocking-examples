@@ -45,7 +45,7 @@
 			  <archive>
 				<manifest>
 				  <addClasspath>true</addClasspath>
-				  <mainClass>package org.foobarspam.MockitoEjemplo.Cotxox</mainClass>
+				  <mainClass>org.foobarspam.MockitoEjemplo.Cotxox</mainClass>
 				</manifest>
 				<manifestEntries>
 				  <url>${project.url}</url>

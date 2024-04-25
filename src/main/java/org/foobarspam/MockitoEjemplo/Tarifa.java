@@ -1,7 +1,5 @@
 package org.foobarspam.MockitoEjemplo;
 
-import org.foobarspam.MockitoEjemplo.Carrera;
-
 public class Tarifa {
 	
 	final static double costeMilla = 1.35;

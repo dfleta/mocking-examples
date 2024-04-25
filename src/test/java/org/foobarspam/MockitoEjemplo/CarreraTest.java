@@ -1,12 +1,11 @@
 package org.foobarspam.MockitoEjemplo;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 
-import org.foobarspam.MockitoEjemplo.Conductor;
-import org.foobarspam.MockitoEjemplo.PoolConductores;
-import org.foobarspam.MockitoEjemplo.Carrera;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -88,24 +87,42 @@ public class CarreraTest {
 		assertEquals(minutos, carrera.getTiempoCarrera(), delta);	
 	}
 	
+	/**
+	 * Casos test con dependencia a las clases:
+	 * Conductor, PoolConductores
+	 * Mockeamos la lógica de los objetos de los
+	 * que dependemos.
+	 */
+
 	@Test
 	public void setConductorTest(){
-		String nombre = "Samantha";
-		Conductor conductor = new Conductor(nombre);
-		carrera.setConductor(conductor);
-		assertEquals(nombre, carrera.getConductor().getNombre());
+		// Conductor conductor = new Conductor(nombre);
+		Conductor mockConductor = mock(Conductor.class);
+		
+		String test="Samantha"; 
+		when(mockConductor.getNombre()).thenReturn(test);
+
+		carrera.setConductor(mockConductor);
+		assertEquals("Samantha", carrera.getConductor().getNombre());
+
+		test="Prius";
+		when(mockConductor.getModelo()).thenReturn(test); 
+		assertEquals(test, carrera.getModeloVehiculo());
 	}
 	
 	@Test
 	public void asignarConductor(){
+		Conductor mockConductor = mock(Conductor.class);
+		when(mockConductor.getNombre()).thenReturn("Samantha");
+
 		carrera.setConductor(null);
-		String nombre = "Samantha";
-		Conductor conductor = new Conductor(nombre);
-		ArrayList<Conductor> poolConductores = new ArrayList<>();
-		poolConductores.add(conductor);
-		PoolConductores conductores = new PoolConductores(poolConductores);
-		carrera.asignarConductor(conductores);
+
+		PoolConductoras mockPool = mock(PoolConductoras.class);
+		when(mockPool.asignarConductor()).thenReturn(mockConductor);
+
+		carrera.asignarConductor(mockPool);
 		assert(carrera.getConductor()!=null);
+		assertEquals(mockConductor.getNombre(), carrera.getConductor().getNombre());
 	}
 	
 	@Test
@@ -117,16 +134,23 @@ public class CarreraTest {
 	
 	@Test
 	public void liberarConductor(){
-		Conductor conductor = new Conductor("Samantha");
-		carrera.setConductor(conductor);
-		carrera.liberarConductor();
+		Conductor mockConductor = mock(Conductor.class);
+		when(mockConductor.isOcupado()).thenReturn(false);
+		carrera.setConductor(mockConductor);
+		carrera.liberarConductor(); // ejem, no testea la logica de carrera
 		assert(!carrera.getConductor().isOcupado());
 	}
 	
 	@Test
 	public void setValoracion(){
-		Conductor conductor = new Conductor("Samantha");
-		carrera.setConductor(conductor);
+
+		Conductor mockConductor = mock(Conductor.class);
+		carrera.setConductor(mockConductor);
+		
+		Double valoracion = 5d;
+		when(mockConductor.getValoracion()).thenReturn(valoracion);
+		assertEquals(valoracion, carrera.getValoracionConductor());
+		
 		carrera.getConductor().setValoracion((byte) 5);
 		assertEquals(5, carrera.getConductor().getValoracion() , 0);
 	}

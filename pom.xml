@@ -8,41 +8,51 @@
   <packaging>jar</packaging>
 
   <name>MockitoEjemplo</name>
-  <url>http://maven.apache.org</url>
+  <url></url>
 
   <properties>
+	<compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <maven.compiler.parameters>true</maven.compiler.parameters>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
   </properties>
 
   <dependencies>
 	<dependency>
 	    <groupId>junit</groupId>
 	    <artifactId>junit</artifactId>
-	    <version>4.12</version>
+	    <version>[4.13.2,)</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
 	<dependency>
-	    <groupId>org.mockito</groupId>
-	    <artifactId>mockito-all</artifactId>
-	    <version>1.10.19</version>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-core</artifactId>
+		<version>5.11.0</version>
+		<scope>test</scope>
 	</dependency>
   </dependencies>
-  
-  <!-- Build Settings -->
+
   <build>
-  	<plugins>
-  		<!-- este plugin para que el proyecto sea compliance con Java 1.8 -->
-  		<plugin>
-  		   <groupId>org.apache.maven.plugins</groupId>
-    	   <artifactId>maven-compiler-plugin</artifactId>
-   		   <configuration>
-		        <source>1.8</source>
-		        <target>1.8</target>
-		        <compilerVersion>1.8</compilerVersion>      
-		        <fork>true</fork>
-		        <executable>D:\jdk1.8\bin\javac</executable>                
-    		</configuration>
-  		</plugin>
-  	</plugins>
-  </build> 
-  
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-jar-plugin</artifactId>
+			<version>3.3.0</version>
+			<configuration>
+			  <archive>
+				<manifest>
+				  <addClasspath>true</addClasspath>
+				  <mainClass>package org.foobarspam.MockitoEjemplo.Cotxox</mainClass>
+				</manifest>
+				<manifestEntries>
+				  <url>${project.url}</url>
+				</manifestEntries>
+			  </archive>
+			</configuration>
+		  </plugin>
+	</plugins>
+  </build>
 </project>

@@ -1,10 +1,5 @@
 package org.foobarspam.MockitoEjemplo;
 
-import org.foobarspam.MockitoEjemplo.Conductora;
-import org.foobarspam.MockitoEjemplo.PoolConductoras;
-import org.foobarspam.MockitoEjemplo.Tarifa;
-
-
 public class Carrera {
 
 	private String tarjetaCredito = null;
@@ -78,8 +73,16 @@ public class Carrera {
 		this.conductor = conductor;
 	}
 	
-	public Conductora getConductor(){
+	public Conductor getConductor(){
 		return this.conductor;
+	}
+
+	public String getModeloVehiculo() {
+		return this.conductor.getModelo();
+	}
+	
+	public Double getValoracionConductor() {
+		return this.getConductor().getValoracion();
 	}
 	
 	public void asignarConductor(PoolConductoras conductores){

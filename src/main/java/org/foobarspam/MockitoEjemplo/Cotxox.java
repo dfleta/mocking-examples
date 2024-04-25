@@ -2,10 +2,6 @@ package org.foobarspam.MockitoEjemplo;
 
 import java.util.ArrayList;
 
-import org.foobarspam.MockitoEjemplo.Carrera;
-import org.foobarspam.MockitoEjemplo.Conductor;
-import org.foobarspam.MockitoEjemplo.PoolConductores;
-
 public class Cotxox {
 
 	public static void main(String[] args) {

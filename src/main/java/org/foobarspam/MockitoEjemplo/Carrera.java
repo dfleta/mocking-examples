@@ -49,9 +49,12 @@ public class Carrera {
 	}
 	
 	// las clases estaticas no pueden mockearse en Mockito
-	public double getCosteEsperado(){
-		return Tarifa.getCosteTotalEsperado(this);
-	}
+	// de momento, este metodo no se usa
+	// public double getCosteEsperado(){
+		// refactorizaríamos Tarifa a un singleton para recibir
+		// simpre un unico un objeto
+		// return tarifa.getCosteTotalEsperado(this);
+	// }
 
 	public int getTiempoEsperado() {
 		return tiempoEsperado;
@@ -92,7 +95,7 @@ public class Carrera {
 	public void asignarConductor(PoolConductoras conductores){
 		setConductor(conductores.asignarConductor());
 	}
-	
+
 	public void realizarPago(double pago){
 		this.costeTotal = pago;
 	}

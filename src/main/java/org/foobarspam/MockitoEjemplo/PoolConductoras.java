@@ -2,12 +2,12 @@ package org.foobarspam.MockitoEjemplo;
 
 public interface PoolConductoras {
 	
-	public Conductor asignarConductor();
+	public Conductora asignarConductor();
 	
-	public void addConductor(Conductor conductor);
+	public void addConductor(Conductora conductor);
 	
 	public int numeroConductores();
 	
-	public Conductor getConductorAt(int index);
+	public Conductora getConductorAt(int index);
 
 }

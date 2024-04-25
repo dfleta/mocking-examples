@@ -52,24 +52,6 @@ public class CarreraTest {
 	}
 	
 	@Test
-	public void getCosteEsperadoTest() {
-		double distancia = 7.75;
-		double costeEsperado = 10.4625;
-		int tiempoEsperado = 10;
-		double delta = 0.01;
-		carrera.setDistancia(distancia);
-		carrera.setTiempoEsperado(tiempoEsperado);
-		assertEquals(distancia*1.35 + tiempoEsperado*0.35, carrera.getCosteEsperado(), delta);
-		
-		// coste por debajo del minimo 5€
-		distancia = 1.0;
-		costeEsperado = 5.0;
-		delta = 0.01;
-		carrera.setDistancia(distancia);
-		assertEquals(costeEsperado, carrera.getCosteEsperado(), delta);		
-	}
-	
-	@Test
 	public void setTiempoEsperadoTest() {
 		int minutos = 10;
 		double delta = 0;
@@ -95,7 +77,10 @@ public class CarreraTest {
 	@Test
 	public void setConductorTest(){
 		// Conductor conductor = new Conductor(nombre);
-		Conductor mockConductor = mock(Conductor.class);
+		// Utilizamos las interfaces para crear los mocks
+		// de los objetos, pues en ellas disponemos de los
+		// métodos abstractos sin implementación.
+		Conductora mockConductor = mock(Conductora.class);
 		
 		String test="Samantha"; 
 		when(mockConductor.getNombre()).thenReturn(test);
@@ -106,11 +91,19 @@ public class CarreraTest {
 		test="Prius";
 		when(mockConductor.getModelo()).thenReturn(test); 
 		assertEquals(test, carrera.getModeloVehiculo());
+
+		test="JFK123"; 
+		when(mockConductor.getMatricula()).thenReturn(test);
+		assertEquals(test, carrera.getMatricula());
 	}
 	
 	@Test
 	public void asignarConductor(){
-		Conductor mockConductor = mock(Conductor.class);
+		// Utilizamos las interfaces para crear los mocks
+		// de Conductor y PoolConductores
+		// de los objetos, pues en ellas disponemos de los
+		// métodos abstractos sin implementación.
+		Conductora mockConductor = mock(Conductora.class);
 		when(mockConductor.getNombre()).thenReturn("Samantha");
 
 		carrera.setConductor(null);
@@ -122,17 +115,29 @@ public class CarreraTest {
 		assert(carrera.getConductor()!=null);
 		assertEquals(mockConductor.getNombre(), carrera.getConductor().getNombre());
 	}
+
+	/**
+	 * Eliminamos este test de la clase
+	 * CarreraTest porque la responsabilidad
+	 * (la logica) de calcular el coste de la 
+	 * carrera se encuentra en la clase Tarifa.
+	 * Se testeara alli.
+	 */
+
+	// @Test public void getCosteEsperadoTest() {}
 	
 	@Test
 	public void realizarPagoTest(){
-		double delta = 0d;
-		carrera.realizarPago(carrera.getCosteEsperado());
-		assertEquals(carrera.getCosteEsperado(), carrera.getCosteTotal() , delta);
+		Tarifa mockTarifa = mock(Tarifa.class);
+		when(mockTarifa.getCosteTotalEsperado(carrera)).thenReturn(10d);
+
+		carrera.realizarPago(mockTarifa.getCosteTotalEsperado(carrera));
+		assertEquals(mockTarifa.getCosteTotalEsperado(carrera), carrera.getCosteTotal() , 0d);
 	}
 	
 	@Test
 	public void liberarConductor(){
-		Conductor mockConductor = mock(Conductor.class);
+		Conductora mockConductor = mock(Conductora.class);
 		when(mockConductor.isOcupado()).thenReturn(false);
 		carrera.setConductor(mockConductor);
 		carrera.liberarConductor(); // ejem, no testea la logica de carrera
@@ -142,7 +147,7 @@ public class CarreraTest {
 	@Test
 	public void setValoracion(){
 
-		Conductor mockConductor = mock(Conductor.class);
+		Conductora mockConductor = mock(Conductora.class);
 		carrera.setConductor(mockConductor);
 		
 		Double valoracion = 5d;

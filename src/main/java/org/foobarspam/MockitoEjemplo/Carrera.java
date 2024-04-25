@@ -12,7 +12,7 @@ public class Carrera {
 	private double costeTotal = 0;
 	private int propina = 0;
 	
-	private Conductor conductor = null;
+	private Conductora conductor = null;
 	
 	
 	public Carrera(String tarjetaCredito){
@@ -49,9 +49,12 @@ public class Carrera {
 	}
 	
 	// las clases estaticas no pueden mockearse en Mockito
-	public double getCosteEsperado(){
-		return Tarifa.getCosteTotalEsperado(this);
-	}
+	// de momento, este metodo no se usa
+	// public double getCosteEsperado(){
+		// refactorizaríamos Tarifa a un singleton para recibir
+		// simpre un unico un objeto
+		// return tarifa.getCosteTotalEsperado(this);
+	// }
 
 	public int getTiempoEsperado() {
 		return tiempoEsperado;
@@ -69,16 +72,20 @@ public class Carrera {
 		this.tiempoCarrera = tiempoCarrera;
 	}
 	
-	public void setConductor(Conductor conductor){
+	public void setConductor(Conductora conductor){
 		this.conductor = conductor;
 	}
 	
-	public Conductor getConductor(){
+	public Conductora getConductor(){
 		return this.conductor;
 	}
 
 	public String getModeloVehiculo() {
 		return this.conductor.getModelo();
+	}
+
+	public String getMatricula() {
+		return this.getConductor().getMatricula();
 	}
 	
 	public Double getValoracionConductor() {
@@ -88,7 +95,7 @@ public class Carrera {
 	public void asignarConductor(PoolConductoras conductores){
 		setConductor(conductores.asignarConductor());
 	}
-	
+
 	public void realizarPago(double pago){
 		this.costeTotal = pago;
 	}

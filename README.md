@@ -15,28 +15,28 @@ Mockito, además, nos ofrece la posibilidad de realizar cierta reflexión sobre 
 
 ```java
 @Test
-	public void asignarConductor(){
-		// Utilizamos las interfaces para crear los mocks
-		// de Conductora y PoolConductoras
-		// pues en ellas disponemos de los
-		// métodos abstractos sin implementación.
-		Conductora mockConductor = mock(Conductora.class);
-		when(mockConductor.getNombre()).thenReturn("Samantha");
+public void asignarConductor(){
+	// Utilizamos las interfaces para crear los mocks
+	// de Conductora y PoolConductoras
+	// pues en ellas disponemos de los
+	// métodos abstractos sin implementación.
+	Conductora mockConductor = mock(Conductora.class);
+	when(mockConductor.getNombre()).thenReturn("Samantha");
 
-		carrera.setConductor(null);
-		assertNull(carrera.getConductor());
+	carrera.setConductor(null);
+	assertNull(carrera.getConductor());
 
-		PoolConductoras mockPool = mock(PoolConductoras.class);
-		when(mockPool.asignarConductor()).thenReturn(mockConductor);
+	PoolConductoras mockPool = mock(PoolConductoras.class);
+	when(mockPool.asignarConductor()).thenReturn(mockConductor);
 
-		carrera.asignarConductor(mockPool);
-		// verificamos que asignarConductor() de PoolConductora
-        // ha sido invocado a través de carrera.asignarConductor()
-		verify(mockPool).asignarConductor();
+	carrera.asignarConductor(mockPool);
+	// verificamos que asignarConductor() de PoolConductora
+    // ha sido invocado a través de carrera.asignarConductor()
+	verify(mockPool).asignarConductor();
 
-		assert(carrera.getConductor()!=null);
-		assertEquals("Samantha", carrera.getConductor().getNombre());
-	}
+	assert(carrera.getConductor()!=null);
+	assertEquals("Samantha", carrera.getConductor().getNombre());
+}
 ```
 
 ## Diagrama de clases UML

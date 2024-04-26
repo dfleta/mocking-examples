@@ -35,5 +35,5 @@ En mi proyeto [grpc-tourism-receptive](https://github.com/dfleta/grpc-tourism-re
 
 https://github.com/dfleta/grpc-tourism-receptive
 
-## Frontend testign & mocks
+## Frontend testing & mocks
 

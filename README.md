@@ -9,9 +9,35 @@ Si las historias de usuario más valiosas suponen la implementación de la clase
 
 Utilizamos [mockito](https://site.mockito.org/) como _framework_ en Junit para construir el comportamiento descrito.
 
-Mockito, además, nos ofrece la posibilidad de realizar cierta reflexión sobre el comportamiento de las clases que "mockea", "espiar" en las tripas de los objetos mockeados, para comprobar que el comportamiento es como suponemos, al igual que hacía Slimer en cazafantasmas.
+Mockito, además, nos ofrece la posibilidad de realizar cierta reflexión sobre el comportamiento de las clases que "mockea", "espiar" en las tripas de los objetos mockeados, para comprobar que el comportamiento es como suponemos, al igual que hacía [Slimer](slimer.webp "Slimer ghost busters")
+ en cazafantasmas.
 
-![slimer](slimer.webp "slimer ghost busters")
+
+```java
+@Test
+	public void asignarConductor(){
+		// Utilizamos las interfaces para crear los mocks
+		// de Conductora y PoolConductoras
+		// pues en ellas disponemos de los
+		// métodos abstractos sin implementación.
+		Conductora mockConductor = mock(Conductora.class);
+		when(mockConductor.getNombre()).thenReturn("Samantha");
+
+		carrera.setConductor(null);
+		assertNull(carrera.getConductor());
+
+		PoolConductoras mockPool = mock(PoolConductoras.class);
+		when(mockPool.asignarConductor()).thenReturn(mockConductor);
+
+		carrera.asignarConductor(mockPool);
+		// verificamos que asignarConductor() de PoolConductora
+        // ha sido invocado a través de carrera.asignarConductor()
+		verify(mockPool).asignarConductor();
+
+		assert(carrera.getConductor()!=null);
+		assertEquals("Samantha", carrera.getConductor().getNombre());
+	}
+```
 
 ## Diagrama de clases UML
 
@@ -54,3 +80,42 @@ En estos casos test se hace uso de las funcionalidades de Jest para mockear comp
 * [box.test](https://github.com/dfleta/proxy-pattern-mrMeeseks-js/blob/master/src/box/test/box.test.js)
 
 * [mrmeeseeks.test](https://github.com/dfleta/proxy-pattern-mrMeeseks-js/blob/master/src/mrmeeseeks/test/mrmeeseeks.test.js)
+
+```js
+test('fullfillRequest ejecuta this.accion()', () => {
+
+        // MOCK FUNCTIONS con IMPLEMENTATIONS
+
+        /**
+         * La funcion accion que necesita fulfillRequest
+         * ha de ser creada previamente por makeRequest()
+         * e inyectada en el objeto meeseeks.
+         * No podemos depender de la implementacion de makeRequest()
+         * para pasar este test => mockear la funcion accion() que
+         * inyecta makeRequest() e inyectarla a mano en el objeto meeseeks 
+         */
+
+        const accionMock = jest
+                            .fn()
+                            .mockImplementation( () => "open" + " " + "Jerry's head")
+                            .mockName('accionMock') // mensajes especificos en test errors outputs
+
+        // inyecto en el objeto la funcion mock
+        meeseeks.accion = accionMock;
+        expect(meeseeks).toHaveProperty('accion'); // primera invocacion de la funcion accionMock
+        
+        // el objeto meeseeks invoca a la funcion mock == segunda invocacion de la función mock
+        expect(meeseeks.fulfillRequest()).toEqual(expect.stringMatching("open" + " " + "Jerry's head" + " All done!!"))
+
+        // accionMock ha debido ser llamada desde fulfillRequest()
+        expect(accionMock).toHaveBeenCalled();
+        // La funcion ha sido llamada exactamente dos veces: toHaveProperty + fullfillRequest
+        expect(accionMock.mock.calls.length).toBe(2);
+        // El valor devuelto en la segunda llamada a la funcion ha sido "open Jerry's head"
+        expect(accionMock.mock.results[1].value).toBe("open Jerry's head");
+        // La funcion ha sido llamada con un cierto contexto `this`: el objeto `meeseeks`
+        expect(accionMock.mock.contexts[0]).toBe(meeseeks);
+        // Ek primer argumento de la ultima llamada a la funcion ha sido 'undefined', accion()
+        expect(accionMock.mock.lastCall[0]).toBe(undefined);
+    });
+```

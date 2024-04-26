@@ -113,8 +113,8 @@ public class CarreraTest {
 	@Test
 	public void asignarConductor(){
 		// Utilizamos las interfaces para crear los mocks
-		// de Conductor y PoolConductores
-		// de los objetos, pues en ellas disponemos de los
+		// de Conductora y PoolConductoras
+		// pues en ellas disponemos de los
 		// métodos abstractos sin implementación.
 		Conductora mockConductor = mock(Conductora.class);
 		when(mockConductor.getNombre()).thenReturn("Samantha");

@@ -35,5 +35,22 @@ En mi proyeto [grpc-tourism-receptive](https://github.com/dfleta/grpc-tourism-re
 
 https://github.com/dfleta/grpc-tourism-receptive
 
+Aquí los casos test: [test grpc](https://github.com/dfleta/grpc-tourism-receptive/tree/master/src/test/java/org/elsmancs/grpc)
+
+En los test de los componentes "clientes" de los servidores se concentra el uso de mockito, para simular que disponemos de servidores de pago, crisal y UFOs que proveen de los objetos que necesitamos para completar el desarrollo de los componentes cliente indendientemente de su estado de desarrollo y funcionamiento:
+
+* [PaymentClientTest](https://github.com/dfleta/grpc-tourism-receptive/blob/master/src/test/java/org/elsmancs/grpc/payment/PaymentClientTest.java)
+* [CrystalClientTest](https://github.com/dfleta/grpc-tourism-receptive/blob/master/src/test/java/org/elsmancs/grpc/crystal/CrystalClientTest.java)
+* [UfosParkClientTest](https://github.com/dfleta/grpc-tourism-receptive/blob/master/src/test/java/org/elsmancs/grpc/ufos/UfosParkClientTest.java)
+
 ## Frontend testing & mocks
 
+En mi proyecto ejemplo sobre el patrón _proxy_ (+ _singleton_), patrón _flyweight_, herencia por prototipos en JS, prototipos delegados, extensión dinámica de objetos, _constructor functions_ [proxy pattern mr meeseeks](https://github.com/dfleta/proxy-pattern-mrMeeseks-js) encontrarás ejemplos de uso de mocking en front, utilizando la librería [Jest](https://jestjs.io/es-ES/ "jest") para JavaScript /EmacScript.
+
+Es conveniente leer el manual de la librería sobre [funciones mock](https://jestjs.io/es-ES/docs/mock-functions)
+
+En estos casos test se hace uso de las funcionalidades de Jest para mockear componentes JavaScript:
+
+* [box.test](https://github.com/dfleta/proxy-pattern-mrMeeseks-js/blob/master/src/box/test/box.test.js)
+
+* [mrmeeseeks.test](https://github.com/dfleta/proxy-pattern-mrMeeseks-js/blob/master/src/mrmeeseeks/test/mrmeeseeks.test.js)

@@ -1,7 +1,10 @@
 package org.foobarspam.MockitoEjemplo;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.Before;
@@ -68,10 +71,14 @@ public class CarreraTest {
 	}
 	
 	/**
-	 * Casos test con dependencia a las clases:
-	 * Conductor, PoolConductores
-	 * Mockeamos la lógica de los objetos de los
+	 * Casos test con dependencia a las interfaces:
+	 * Conductor, PoolConductores y Tarifa.
+	 * Mockeamos la lógica de las interfaces de las
 	 * que dependemos.
+	 * Al usar interfaces evitamos la necesidad de
+	 * la implementación de las clases y sus constructores
+	 * y una implementación básica de la rutina que
+	 * proveerá del comportamiento que necesitamos.
 	 */
 
 	@Test
@@ -91,10 +98,16 @@ public class CarreraTest {
 		test="Prius";
 		when(mockConductor.getModelo()).thenReturn(test); 
 		assertEquals(test, carrera.getModeloVehiculo());
+		// verificamos que carrera.getModeloVehiculo() ha invocado
+		// a la rurina getModelo() de conductor
+		verify(mockConductor).getModelo();
+		// expresado de otra manera:
+		verify(mockConductor, times(1)).getModelo();
 
 		test="JFK123"; 
 		when(mockConductor.getMatricula()).thenReturn(test);
 		assertEquals(test, carrera.getMatricula());
+		verify(mockConductor).getMatricula();
 	}
 	
 	@Test
@@ -107,13 +120,17 @@ public class CarreraTest {
 		when(mockConductor.getNombre()).thenReturn("Samantha");
 
 		carrera.setConductor(null);
+		assertNull(carrera.getConductor());
 
 		PoolConductoras mockPool = mock(PoolConductoras.class);
 		when(mockPool.asignarConductor()).thenReturn(mockConductor);
 
 		carrera.asignarConductor(mockPool);
+		// asignarConductor() de PoolConductora ha sido invocado:
+		verify(mockPool).asignarConductor();
+
 		assert(carrera.getConductor()!=null);
-		assertEquals(mockConductor.getNombre(), carrera.getConductor().getNombre());
+		assertEquals("Samantha", carrera.getConductor().getNombre());
 	}
 
 	/**
@@ -140,7 +157,10 @@ public class CarreraTest {
 		Conductora mockConductor = mock(Conductora.class);
 		when(mockConductor.isOcupado()).thenReturn(false);
 		carrera.setConductor(mockConductor);
+		assertNotNull(carrera.getConductor());
+		doNothing().when(mockConductor).setOcupado(false);
 		carrera.liberarConductor(); // ejem, no testea la logica de carrera
+		verify(mockConductor).setOcupado(false);
 		assert(!carrera.getConductor().isOcupado());
 	}
 	
@@ -152,7 +172,13 @@ public class CarreraTest {
 		
 		Double valoracion = 5d;
 		when(mockConductor.getValoracion()).thenReturn(valoracion);
+		// verify(mockConductor).getValoracion();
+		// Esta primera llamada lanza una runtime exception.
+		// there were zero interactions with this mock.
 		assertEquals(valoracion, carrera.getValoracionConductor());
+		// Chequeamos que desde carrera hemos invocado 
+		// getValoracion() del objeto mockConductor
+ 		verify(mockConductor).getValoracion();
 		
 		carrera.getConductor().setValoracion((byte) 5);
 		assertEquals(5, carrera.getConductor().getValoracion() , 0);

@@ -17,6 +17,16 @@ Mockito, además, nos ofrece la posibilidad de realizar cierta reflexión sobre 
 
 ![Diagrama de clases UML](./diagrama_clases_UML.png "Diagrama de clases UML")
 
+## Referencia de Mockito
+
+Aquí un [tutorial](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html "tutorial mockito") con ejemplos básicos de uso. Conviene que lo leas para usar los mocks de manera eficiente:
+
+https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html
+
+No está de más leerse esta [RefCard](https://dzone.com/refcardz/mockito "refcard mockito"):
+
+https://dzone.com/refcardz/mockito
+
 ## Microservicios con moc(kit)os
 
 Testear aplicaciones en el Mundo Real TM es un poco más complicado y, si a la dificultad añadida por la arquitectura cliente-servidor, le sumamos la de una arquitectura basada en microservicios, lejos de las placenteras aplicaciones monolíticas, entonces es necesario disponer de un conocimiento más profundo de la API del _framework_ de testig y mock.
@@ -24,3 +34,6 @@ Testear aplicaciones en el Mundo Real TM es un poco más complicado y, si a la d
 En mi proyeto [grpc-tourism-receptive](https://github.com/dfleta/grpc-tourism-receptive) encontrarás a mockito y Slimer en acción en una aplicación basada en el framework gRPC de Google para la construcción de aplicaciones basadas en microservicios, implementando el patrón GoF _observer_ para implementar la lógica de un receptivo turístico al estilo mallorquín ;)
 
 https://github.com/dfleta/grpc-tourism-receptive
+
+## Frontend testign & mocks
+

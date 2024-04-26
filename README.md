@@ -69,6 +69,47 @@ En los test de los componentes "clientes" de los servidores se concentra el uso 
 * [CrystalClientTest](https://github.com/dfleta/grpc-tourism-receptive/blob/master/src/test/java/org/elsmancs/grpc/crystal/CrystalClientTest.java)
 * [UfosParkClientTest](https://github.com/dfleta/grpc-tourism-receptive/blob/master/src/test/java/org/elsmancs/grpc/ufos/UfosParkClientTest.java)
 
+```java
+@Test
+public void UfoOf_test() {
+
+    // Mensaje CreditCard al servicio
+    CreditCard card = CreditCard.newBuilder()
+                                    .setOwner("Rick")
+                                    .setNumber("111111111111")
+                                    .build();
+
+    AtomicReference<CreditCard> cardDelivered = new AtomicReference<CreditCard>();
+
+    // Mock de la respuesta /mensaje Processed del servicio
+    Ufo responseUfo = Ufo.newBuilder()
+                            .setId("unox")
+                            .setCardNumbe("111111111111")
+                            .setFee(500)
+                            .build();
+
+    // Fake service
+    UfosParkImplBase assignImpl = new UfosParkImplBase() {
+        @Override
+        public void ufoOf(CreditCard request, StreamObserver<org.elsmancs.grpc.Ufo> response) {
+            // para chequear que la construccion del Ufo en el client se realiza OK
+            cardDelivered.set(request);
+            // return the Ufo
+            response.onNext(responseUfo);
+            // Specify that we’ve finished dealing with the RPC.
+            response.onCompleted();
+        }
+    };
+
+    serviceRegistry.addService(assignImpl);
+
+    String ufoID = client.UfoOf("Rick", "111111111111");
+
+    assertEquals(card, cardDelivered.get());
+    assertEquals(responseUfo.getId(), ufoID);
+}    
+```
+
 ## Frontend testing & mocks
 
 En mi proyecto ejemplo sobre el patrón _proxy_ (+ _singleton_), patrón _flyweight_, herencia por prototipos en JS, prototipos delegados, extensión dinámica de objetos, _constructor functions_ [proxy pattern mr meeseeks](https://github.com/dfleta/proxy-pattern-mrMeeseks-js) encontrarás ejemplos de uso de mocking en front, utilizando la librería [Jest](https://jestjs.io/es-ES/ "jest") para JavaScript /EmacScript.
